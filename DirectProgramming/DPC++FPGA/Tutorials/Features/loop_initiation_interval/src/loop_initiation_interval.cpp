@@ -99,11 +99,11 @@ void RunKernel(std::vector<int> &in, std::vector<int> &out) {
           // that it does not restrict the maximum fMAX
 #if defined(ENABLE_II)
 #if defined(A10)
-          [[intel::initiation_interval(3)]]
+          [[intel::initiation_interval(6)]]
 #elif defined(S10)
-          [[intel::initiation_interval(5)]]
+          [[intel::initiation_interval(10)]]
 #elif defined(Agilex)
-          [[intel::initiation_interval(5)]]
+          [[intel::initiation_interval(10)]]
 #else
           static_assert(false, "Unknown FPGA Architecture!");
 #endif
@@ -122,6 +122,16 @@ void RunKernel(std::vector<int> &in, std::vector<int> &out) {
           // whole design as fMAX is a system-wide constraint and this loop has
           // few iterations.
           for (size_t j = 0; j < kInitLoopSize; j++) {
+            num += 1;
+            num ^= 1;
+            num += 1;
+            num ^= 1;
+            num += 1;
+            num ^= 1;
+            num += 1;
+            num ^= 1;
+            num += 1;
+            num ^= 1;
             num += 1;
             num ^= 1;
             num += 1;
